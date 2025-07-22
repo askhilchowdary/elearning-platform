@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "name": "elearning-platform",
+  "builds": [
+    {
+      "src": "server/server.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "client/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "server/server.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "client/$1"
+    }
+  ],
+  "env": {
+    "MONGODB_URI": "mongodb+srv://elearning-admin:TIW7ci6WRVDPsFAL@elearning-cluster.jlxrvsd.mongodb.net/elearning?retryWrites=true&w=majority&appName=elearning-cluster",
+    "JWT_SECRET": "elearning_platform_jwt_secret_2024_production",
+    "NODE_ENV": "production"
+  }
+}
